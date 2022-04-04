@@ -1,4 +1,4 @@
-﻿namespace CodeAnalysis;
+﻿namespace CodeAnalysis.Syntax;
 
 public sealed class ParenthesizedExpression : ExpressionSyntax
 {

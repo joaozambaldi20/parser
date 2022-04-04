@@ -1,4 +1,5 @@
 ﻿using CodeAnalysis;
+using CodeAnalysis.Syntax;
 
 var repl = new Repl();
 var showTree = false;

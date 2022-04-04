@@ -1,3 +1,3 @@
-namespace CodeAnalysis;
+namespace CodeAnalysis.Syntax;
 
 public sealed class ManufacturedTokenValue { }

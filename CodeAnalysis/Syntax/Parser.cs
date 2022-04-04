@@ -1,4 +1,4 @@
-namespace CodeAnalysis;
+namespace CodeAnalysis.Syntax;
 
 internal sealed class Parser
 {
