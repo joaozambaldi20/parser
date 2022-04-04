@@ -15,13 +15,27 @@ public sealed class Evaluator
 
     private double EvaluateExpression(ExpressionSyntax root)
     {
+        // Unary Expressions
+        if (root is UnaryExpressionSyntax u)
+        {
+            var operand = EvaluateExpression(u.Operand);
+            
+            if (u.OperatorToken.Type is ESyntaxType.PlusToken)
+                return operand;
+
+            if (u.OperatorToken.Type is ESyntaxType.MinusToken)
+                return -operand;
+
+            throw new Exception($"Unexpected unary operator to be {u.OperatorToken.Type}");
+        }
+
         // Binnary Expressions
         if (root is BinaryExpressionSyntax b)
         {
             var right = EvaluateExpression(b.Right);
             var left = EvaluateExpression(b.Left);
 
-            switch (b.Operator.Type)
+            switch (b.OperatorToken.Type)
             {
                 case ESyntaxType.PlusToken:
                     return left + right;
@@ -33,7 +47,7 @@ public sealed class Evaluator
                     if (right == 0) throw new DivideByZeroException();
                     return left / right;
                 default:
-                    throw new Exception($"Unexpected binary operator to be {b.Operator.Type}");
+                    throw new Exception($"Unexpected binary operator to be {b.OperatorToken.Type}");
             }
         }
 

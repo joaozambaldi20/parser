@@ -26,6 +26,7 @@ public enum ESyntaxType
 
     
     LiteralExpression,
+    UnaryExpression,
     BinaryExpression,
     ParethesizedExpression
 }

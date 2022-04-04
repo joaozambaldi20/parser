@@ -2,23 +2,23 @@ namespace CodeAnalysis;
 
 public sealed class BinaryExpressionSyntax : ExpressionSyntax
 {
-    public override ESyntaxType Type { get => ESyntaxType.BinaryExpression; }
+    public override ESyntaxType Type => ESyntaxType.BinaryExpression;
     public ExpressionSyntax Left { get; }
     public ExpressionSyntax Right { get; }
-    public SyntaxToken Operator { get; }
+    public SyntaxToken OperatorToken { get; }
 
 
-    public BinaryExpressionSyntax(ExpressionSyntax left, ExpressionSyntax right, SyntaxToken @operator)
+    public BinaryExpressionSyntax(ExpressionSyntax left, ExpressionSyntax right, SyntaxToken operatorToken)
     {
         Left = left;
         Right = right;
-        Operator = @operator;
+        OperatorToken = operatorToken;
     }
     
     public override IEnumerable<SyntaxNode> GetChildren()
     {
         yield return Left;
-        yield return Operator;
+        yield return OperatorToken;
         yield return Right;
     }
 }
