@@ -10,7 +10,7 @@ public class Repl
 
     private static void Write(string line, string end = "\n")
     {
-        Console.WriteLine(line + end);
+        Console.Write(line + end);
     }
 
     public int Run(Action<string, Action<string, string>, Action<ConsoleColor, Action>> f)
