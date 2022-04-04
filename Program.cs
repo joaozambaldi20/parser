@@ -20,7 +20,7 @@ repl.Run((input, write, withColor) =>
     {
         withColor(ConsoleColor.Red, () =>
         {
-            write(diagnostic, "\n");
+            write(diagnostic);
         });
     }    
 
@@ -32,7 +32,7 @@ repl.Run((input, write, withColor) =>
     if (!parser.Diagnostics.Any())
     {
         var evaluator = new Evaluator(syntaxTree.Root);
-        write($"{evaluator.Evaluate()}", "\n");
+        write($"{evaluator.Evaluate()}");
     }
 
 });

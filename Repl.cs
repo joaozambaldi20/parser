@@ -1,5 +1,7 @@
+public delegate void ReplWriteDelegate(string line, string end = "\n");
 public class Repl
 {
+ 
     private static void WithColor(ConsoleColor color, Action f)
     {
         var initialColor = Console.ForegroundColor;
@@ -13,7 +15,7 @@ public class Repl
         Console.Write(line + end);
     }
 
-    public int Run(Action<string, Action<string, string>, Action<ConsoleColor, Action>> f)
+    public int Run(Action<string, ReplWriteDelegate, Action<ConsoleColor, Action>> f)
     {
         var quit = false;
 
