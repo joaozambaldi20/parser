@@ -3,23 +3,29 @@ namespace CodeAnalysis;
 public enum ESyntaxType
 {
     BadToken,
-    WhiteSpace,
-    OpeningParenthesis,
-    ClosingParenthesis,
-    OpeningCurlyBrace,
-    ClosingCurlyBrace,
-    OpeningSquareBracket,
-    ClosingSquareBracket,
-    PlusSign,
-    MinusSign,
-    LogicalOr,
-    LogicalAnd,
-    Asterisk,
-    ForwardSlash,
-    NumericLiteral,
-    EOF,
+    EOFToken,
+    WhiteSpaceToken,
+    NumberToken,
+
+    // mathematical opoerators
+    PlusToken,
+    MinusToken,
+    StarToken,
+    ForwardSlashToken,
+
+    // logical operators
+    AndToken,
+    OrToken,
+
+    OpeningParenthesisToken,
+    ClosingParenthesisToken,
+    OpeningCurlyBraceToken,
+    ClosingCurlyBraceToken,
+    OpeningSquareBracketToken,
+    ClosingSquareBracketToken,
+
     
-    NumericLiteralExpression,
+    NumberExpression,
     BinaryExpression,
     ParethesizedExpression
 }

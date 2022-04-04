@@ -1,6 +1,6 @@
 namespace CodeAnalysis;
 
-public class Token : SyntaxNode
+public sealed class SyntaxToken : SyntaxNode
 {
     public override ESyntaxType Type { get; }
     public int Position { get; }
@@ -8,7 +8,7 @@ public class Token : SyntaxNode
     public object Value { get; }
 
 
-    public Token(ESyntaxType type, int position, string text, object value)
+    public SyntaxToken(ESyntaxType type, int position, string text, object value)
     {
         Type = type;
         Position = position;

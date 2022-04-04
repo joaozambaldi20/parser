@@ -3,10 +3,10 @@
 public sealed class SyntaxTree
 {
     public ExpressionSyntax Root { get; }
-    public Token EndOfFileToken { get; }
+    public SyntaxToken EndOfFileToken { get; }
     public IReadOnlyList<string> Diagnostics { get; }
 
-    public SyntaxTree(IEnumerable<string> diagnostics, ExpressionSyntax root, Token eof)
+    public SyntaxTree(IEnumerable<string> diagnostics, ExpressionSyntax root, SyntaxToken eof)
     {
         Root = root;
         EndOfFileToken = eof;
@@ -26,7 +26,7 @@ public sealed class SyntaxTree
 
         write($"{indent}{marker} {node.Type}");
 
-        if (node is Token t && t.Value is not null)
+        if (node is SyntaxToken t && t.Value is not null)
         {
             write($" {t.Value}");
         }

@@ -1,18 +1,17 @@
 namespace CodeAnalysis;
 
-public sealed class NumericLiteralExpression : ExpressionSyntax
+public sealed class LiteralExpressionSyntax : ExpressionSyntax
 {
-    public override ESyntaxType Type { get => ESyntaxType.NumericLiteralExpression; }
-    public Token Token { get; }
+    public override ESyntaxType Type => ESyntaxType.NumberExpression;
+    public SyntaxToken LiteralToken { get; }
 
-    public NumericLiteralExpression(Token token)
+    public LiteralExpressionSyntax(SyntaxToken token)
     {
-        token.EnsurESyntaxType(ESyntaxType.NumericLiteral);
-        Token = token;
+        LiteralToken = token;
     }
 
     public override IEnumerable<SyntaxNode> GetChildren()
     {
-        yield return Token;
+        yield return LiteralToken;
     }
 }

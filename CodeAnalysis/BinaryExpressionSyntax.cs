@@ -5,10 +5,10 @@ public sealed class BinaryExpressionSyntax : ExpressionSyntax
     public override ESyntaxType Type { get => ESyntaxType.BinaryExpression; }
     public ExpressionSyntax Left { get; }
     public ExpressionSyntax Right { get; }
-    public Token Operator { get; }
+    public SyntaxToken Operator { get; }
 
 
-    public BinaryExpressionSyntax(ExpressionSyntax left, ExpressionSyntax right, Token @operator)
+    public BinaryExpressionSyntax(ExpressionSyntax left, ExpressionSyntax right, SyntaxToken @operator)
     {
         Left = left;
         Right = right;

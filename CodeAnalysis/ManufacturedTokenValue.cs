@@ -1,3 +1,3 @@
 namespace CodeAnalysis;
 
-public class ManufacturedTokenValue { }
+public sealed class ManufacturedTokenValue { }

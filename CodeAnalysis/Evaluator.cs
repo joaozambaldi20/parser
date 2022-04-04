@@ -23,13 +23,13 @@ public sealed class Evaluator
 
             switch (b.Operator.Type)
             {
-                case ESyntaxType.PlusSign:
+                case ESyntaxType.PlusToken:
                     return left + right;
-                case ESyntaxType.MinusSign:
+                case ESyntaxType.MinusToken:
                     return left - right;
-                case ESyntaxType.Asterisk:
+                case ESyntaxType.StarToken:
                     return left * right;
-                case ESyntaxType.ForwardSlash:
+                case ESyntaxType.ForwardSlashToken:
                     if (right == 0) throw new DivideByZeroException();
                     return left / right;
                 default:
@@ -38,9 +38,9 @@ public sealed class Evaluator
         }
 
         // Numeric Literal Expression
-        if (root is NumericLiteralExpression n)
+        if (root is LiteralExpressionSyntax n)
         {
-            return (double) n.Token.Value;
+            return (double) n.LiteralToken.Value;
         }
 
         // Parenthersized Expressions

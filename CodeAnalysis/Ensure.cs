@@ -1,8 +1,8 @@
 ﻿namespace CodeAnalysis;
 
-public static class Ensure
+static class Ensure
 {
-    public static void EnsurESyntaxType(this Token tokentype, ESyntaxType tokenType)
+    public static void EnsurESyntaxType(this SyntaxToken tokentype, ESyntaxType tokenType)
     {
         if (tokentype.Type != tokenType)
         {
