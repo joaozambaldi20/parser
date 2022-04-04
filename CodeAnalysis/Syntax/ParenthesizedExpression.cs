@@ -15,7 +15,7 @@ public sealed class ParenthesizedExpression : ExpressionSyntax
         Expression = expression;
     }
 
-    public override ESyntaxType Type => ESyntaxType.ParethesizedExpression;
+    public override ESyntaxKind Kind => ESyntaxKind.ParethesizedExpression;
 
     public override IEnumerable<SyntaxNode> GetChildren()
     {

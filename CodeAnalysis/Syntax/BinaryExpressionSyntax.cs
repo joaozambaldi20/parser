@@ -2,7 +2,7 @@ namespace CodeAnalysis.Syntax;
 
 public sealed class BinaryExpressionSyntax : ExpressionSyntax
 {
-    public override ESyntaxType Type => ESyntaxType.BinaryExpression;
+    public override ESyntaxKind Kind => ESyntaxKind.BinaryExpression;
     public ExpressionSyntax Left { get; }
     public ExpressionSyntax Right { get; }
     public SyntaxToken OperatorToken { get; }

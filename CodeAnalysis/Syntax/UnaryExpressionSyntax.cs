@@ -2,7 +2,7 @@ namespace CodeAnalysis.Syntax;
 
 public sealed class UnaryExpressionSyntax : ExpressionSyntax
 {
-    public override ESyntaxType Type => ESyntaxType.UnaryExpression;
+    public override ESyntaxKind Kind => ESyntaxKind.UnaryExpression;
     public SyntaxToken OperatorToken { get; }
     public ExpressionSyntax Operand { get; }
 

@@ -24,7 +24,7 @@ public sealed class SyntaxTree
     {
         var marker = last ? "└──" : "├──";
 
-        write($"{indent}{marker} {node.Type}");
+        write($"{indent}{marker} {node.Kind}");
 
         if (node is SyntaxToken t && t.Value is not null)
         {

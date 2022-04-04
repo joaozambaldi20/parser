@@ -22,13 +22,13 @@ public sealed class Evaluator
         {
             var operand = EvaluateExpression(u.Operand);
             
-            if (u.OperatorToken.Type is ESyntaxType.PlusToken)
+            if (u.OperatorToken.Kind is ESyntaxKind.PlusToken)
                 return operand;
 
-            if (u.OperatorToken.Type is ESyntaxType.MinusToken)
+            if (u.OperatorToken.Kind is ESyntaxKind.MinusToken)
                 return -operand;
 
-            throw new Exception($"Unexpected unary operator to be {u.OperatorToken.Type}");
+            throw new Exception($"Unexpected unary operator to be {u.OperatorToken.Kind}");
         }
 
         // Binnary Expressions
@@ -37,19 +37,19 @@ public sealed class Evaluator
             var right = EvaluateExpression(b.Right);
             var left = EvaluateExpression(b.Left);
 
-            switch (b.OperatorToken.Type)
+            switch (b.OperatorToken.Kind)
             {
-                case ESyntaxType.PlusToken:
+                case ESyntaxKind.PlusToken:
                     return left + right;
-                case ESyntaxType.MinusToken:
+                case ESyntaxKind.MinusToken:
                     return left - right;
-                case ESyntaxType.StarToken:
+                case ESyntaxKind.StarToken:
                     return left * right;
-                case ESyntaxType.ForwardSlashToken:
+                case ESyntaxKind.ForwardSlashToken:
                     if (right == 0) throw new DivideByZeroException();
                     return left / right;
                 default:
-                    throw new Exception($"Unexpected binary operator to be {b.OperatorToken.Type}");
+                    throw new Exception($"Unexpected binary operator to be {b.OperatorToken.Kind}");
             }
         }
 

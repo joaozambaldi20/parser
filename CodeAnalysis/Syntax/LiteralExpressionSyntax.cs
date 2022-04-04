@@ -2,7 +2,7 @@ namespace CodeAnalysis.Syntax;
 
 public sealed class LiteralExpressionSyntax : ExpressionSyntax
 {
-    public override ESyntaxType Type => ESyntaxType.LiteralExpression;
+    public override ESyntaxKind Kind => ESyntaxKind.LiteralExpression;
     public SyntaxToken LiteralToken { get; }
 
     public LiteralExpressionSyntax(SyntaxToken token)

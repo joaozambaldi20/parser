@@ -2,27 +2,27 @@ namespace CodeAnalysis.Syntax;
 
 internal static class SyntaxFacts
 {
-    public static int GetUnaryOperatorPrecedence(this ESyntaxType type)
+    public static int GetUnaryOperatorPrecedence(this ESyntaxKind kind)
     {
-        switch (type)
+        switch (kind)
         {
-            case ESyntaxType.PlusToken:
-            case ESyntaxType.MinusToken:
+            case ESyntaxKind.PlusToken:
+            case ESyntaxKind.MinusToken:
                 return 3;
             default:
                 return 0;
         }
     }
 
-    public static int GetBinaryOperatorPrecedence(this ESyntaxType type)
+    public static int GetBinaryOperatorPrecedence(this ESyntaxKind kind)
     {
-        switch (type)
+        switch (kind)
         {
-            case ESyntaxType.PlusToken:
-            case ESyntaxType.MinusToken:
+            case ESyntaxKind.PlusToken:
+            case ESyntaxKind.MinusToken:
                 return 1;
-            case ESyntaxType.StarToken:
-            case ESyntaxType.ForwardSlashToken:
+            case ESyntaxKind.StarToken:
+            case ESyntaxKind.ForwardSlashToken:
                 return 2;
             default:
                 return 0;

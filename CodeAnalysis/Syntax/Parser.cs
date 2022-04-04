@@ -23,34 +23,34 @@ internal sealed class Parser
         return curr;
     }
 
-    private SyntaxToken MatchToken(ESyntaxType type)
+    private SyntaxToken MatchToken(ESyntaxKind kind)
     {
-        if (Current.Type == type)
+        if (Current.Kind == kind)
             return NextToken();
 
-        _diagnostics.Add($"ERROR: Unexpected token <{Current.Type}>, expected <{type}>");
-        return new SyntaxToken(type, Current.Position, string.Empty, new ManufacturedTokenValue());
+        _diagnostics.Add($"ERROR: Unexpected token <{Current.Kind}>, expected <{kind}>");
+        return new SyntaxToken(kind, Current.Position, string.Empty, new ManufacturedTokenValue());
     }
 
     private ExpressionSyntax ParsePrimaryExpression()
     {
-        if (Current.Type is ESyntaxType.OpeningParenthesisToken)
+        if (Current.Kind is ESyntaxKind.OpeningParenthesisToken)
         {
             var left = NextToken();
             var expression = ParseExpression();
-            var right = MatchToken(ESyntaxType.ClosingParenthesisToken);
+            var right = MatchToken(ESyntaxKind.ClosingParenthesisToken);
 
             return new ParenthesizedExpression(left, right, expression);
         }
 
-        var numberToken = MatchToken(ESyntaxType.NumberToken);
+        var numberToken = MatchToken(ESyntaxKind.NumberToken);
         return new LiteralExpressionSyntax(numberToken);
     }
 
     private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
     {
         ExpressionSyntax left;
-        var unaryOperatorPrecedence = Current.Type.GetUnaryOperatorPrecedence();
+        var unaryOperatorPrecedence = Current.Kind.GetUnaryOperatorPrecedence();
 
         if (unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
         {
@@ -65,7 +65,7 @@ internal sealed class Parser
 
         while (true)
         {
-            var precedence = Current.Type.GetBinaryOperatorPrecedence();
+            var precedence = Current.Kind.GetBinaryOperatorPrecedence();
             if (precedence == 0 || precedence <= parentPrecedence)
                 break;
             
@@ -86,13 +86,13 @@ internal sealed class Parser
         do
         {
             token = lexer.NextToken();
-            if (token.Type != ESyntaxType.WhiteSpaceToken)
+            if (token.Kind != ESyntaxKind.WhiteSpaceToken)
             {
                 tokens.Add(token);
             }
 
         }
-        while(token.Type != ESyntaxType.EOFToken);
+        while(token.Kind != ESyntaxKind.EOFToken);
 
         _diagnostics.AddRange(lexer.Diagnostics);
         _tokenArray = tokens.ToArray();
@@ -101,7 +101,7 @@ internal sealed class Parser
     public SyntaxTree Parse()
     {
         var expression = ParseExpression();
-        var eofToken = MatchToken(ESyntaxType.EOFToken);
+        var eofToken = MatchToken(ESyntaxKind.EOFToken);
         return new SyntaxTree(_diagnostics, expression, eofToken);
     }
     public IEnumerable<string> Diagnostics => _diagnostics;

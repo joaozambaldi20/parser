@@ -38,7 +38,7 @@ internal sealed class Lexer
         
         if (_position >= _text.Length)
         {
-            return new SyntaxToken(ESyntaxType.EOFToken, _position, "", '\0');
+            return new SyntaxToken(ESyntaxKind.EOFToken, _position, "", '\0');
         }
 
         // White Space mode
@@ -52,7 +52,7 @@ internal sealed class Lexer
             var length = _position - startPosition;
             var text = _text.Substring(startPosition, length);
             
-            return new SyntaxToken(ESyntaxType.WhiteSpaceToken, startPosition, text, text);
+            return new SyntaxToken(ESyntaxKind.WhiteSpaceToken, startPosition, text, text);
         }
 
         // Number mode
@@ -81,95 +81,95 @@ internal sealed class Lexer
                 _diagnostics.Add($"The number {text} is not a valid double");
             }
 
-            return new SyntaxToken(ESyntaxType.NumberToken, startPosition, text, value);
+            return new SyntaxToken(ESyntaxKind.NumberToken, startPosition, text, value);
         }
 
         if (Current == '+')
         {
-            var token = new SyntaxToken(ESyntaxType.PlusToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.PlusToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '-')
         {
-            var token = new SyntaxToken(ESyntaxType.MinusToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.MinusToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '*')
         {
-            var token = new SyntaxToken(ESyntaxType.StarToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.StarToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '/')
         {
-            var token = new SyntaxToken(ESyntaxType.ForwardSlashToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.ForwardSlashToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '(')
         {
-            var token = new SyntaxToken(ESyntaxType.OpeningParenthesisToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.OpeningParenthesisToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == ')')
         {
-            var token = new SyntaxToken(ESyntaxType.ClosingParenthesisToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.ClosingParenthesisToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '[')
         {
-            var token = new SyntaxToken(ESyntaxType.OpeningSquareBracketToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.OpeningSquareBracketToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == ']')
         {
-            var token = new SyntaxToken(ESyntaxType.ClosingSquareBracketToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.ClosingSquareBracketToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '{')
         {
-            var token = new SyntaxToken(ESyntaxType.OpeningCurlyBraceToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.OpeningCurlyBraceToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == '}')
         {
-            var token = new SyntaxToken(ESyntaxType.ClosingCurlyBraceToken, _position, Current.ToString(), Current);
+            var token = new SyntaxToken(ESyntaxKind.ClosingCurlyBraceToken, _position, Current.ToString(), Current);
             Next();
             return token;
         }
 
         if (Current == 'o' && SpyNext() == 'r')
         {
-            var token = new SyntaxToken(ESyntaxType.OrToken, _position, "or", "OR");
+            var token = new SyntaxToken(ESyntaxKind.OrToken, _position, "or", "OR");
             _position += 2;
             return token;
         }
 
         if (Current == 'a' && SpyNext() == 'n' && SpyNext(2) == 'd')
         {
-            var token = new SyntaxToken(ESyntaxType.AndToken, _position, "and", "AND");
+            var token = new SyntaxToken(ESyntaxKind.AndToken, _position, "and", "AND");
             _position += 3;
             return token;
         }
 
         _diagnostics.Add($"ERROR: bad character in input {Current} at position {_position}");
-        return new SyntaxToken(ESyntaxType.BadToken, ++_position, _text.Substring(_position - 1, 1), new ManufacturedTokenValue());
+        return new SyntaxToken(ESyntaxKind.BadToken, ++_position, _text.Substring(_position - 1, 1), new ManufacturedTokenValue());
     }
 
 }

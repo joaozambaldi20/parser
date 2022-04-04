@@ -1,6 +1,6 @@
 namespace CodeAnalysis.Syntax;
 
-public enum ESyntaxType
+public enum ESyntaxKind
 {
     BadToken,
     EOFToken,
